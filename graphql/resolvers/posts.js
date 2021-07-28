@@ -1,4 +1,4 @@
-const {AuthenticationError} = require('apollo-server')
+const {AuthenticationError, UserInputError} = require('apollo-server')
 
 const Post = require('../../model/Post')
 const checkAuth = require('../../utils/checkAuth')
@@ -34,6 +34,10 @@ module.exports = {
         // context for authentication middleware
         async createPost(_, {body}, context){
             const user = checkAuth(context);
+
+            if(args.body.trim() === '') {
+                throw new Error('Post body must not be empty')
+            }
             
             const newPost = new Post({
                 body,
@@ -43,7 +47,11 @@ module.exports = {
             })
 
             const post = await newPost.save()
-
+            // Publishing the subscription
+            context.pubsub.publish('NEW_POST', {
+                newPost: post
+            })
+            
             return post;
         },
 
@@ -62,6 +70,36 @@ module.exports = {
               throw new Error(err);
             }
           },
+
+        async likePost(_, { postId}, context) {
+            const {username} = checkAuth(context)
+
+            const post = await Post.findById(postId);
+            if(post) {
+                if(post.likes.find(like => like.username === username)){
+                    // Unlike it 
+                    post.likes = post.likes.filter(like => like.username !== username)
+                }else {
+                    // Like It
+                    post.likes.push({
+                        username,
+                        createdAt: new Date().toISOString()
+                    })
+                }
+
+                await post.save();
+                return post;
+            }else {
+                throw new UserInputError('Post not found')
+            }
+        },
+    },
+
+
+    Subscription: {
+        newPost: {
+            subscribe: (_,__,{pubsub}) => pubsub.asyncIterator('NEW_POST')
+        }
     }
 
 }
