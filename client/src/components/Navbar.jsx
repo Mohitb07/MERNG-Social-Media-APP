@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Menu } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 
+import { AuthContext } from '../context/auth';
+
 export default function Navbar(){
+    const {user, logout} = useContext(AuthContext)
     const pathname = window.location.pathname;
     const path = pathname === '/' ? 'home' : pathname.substr(1);
     const [activeItem, setActiveItem] = useState(path)
@@ -11,9 +14,24 @@ export default function Navbar(){
     
     const handleItemClick = (e, { name }) => setActiveItem(name)
 
-    return  (
-        <div>
-          <Menu pointing secondary size="massive" color="teal">
+    const nav = user ? (
+      <Menu pointing secondary size="massive" color="teal">
+            <Menu.Item
+              name={user.username}
+              active
+              as={Link}
+              to="/"
+            />
+            <Menu.Menu position='right'>
+              <Menu.Item
+                name='Logout'
+                onClick={logout}
+    
+              />
+            </Menu.Menu>
+          </Menu>
+    ) : (
+      <Menu pointing secondary size="massive" color="teal">
             <Menu.Item
               name='home'
               active={activeItem === 'home'}
@@ -38,10 +56,8 @@ export default function Navbar(){
               />
             </Menu.Menu>
           </Menu>
-{/*   
-          <Segment>
-            <img src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' />
-          </Segment> */}
-        </div>
-      )
+    )
+    
+    
+    return nav;
   }
