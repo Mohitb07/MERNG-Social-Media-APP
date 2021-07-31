@@ -7,17 +7,21 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Navbar from './components/Navbar'
+import { AuthProvider } from './context/auth';
+import AuthRoutes from './utils/AuthRoutes';
 
 function App() {
   return (
-    <Router>
-      <Container>
-        <Navbar/>
-        <Route exact path="/" component={Home}/>
-        <Route exact path="/login" component={Login}/>
-        <Route exact path="/register" component={Register}/>
-      </Container>
-    </Router>
+    <AuthProvider>
+        <Router>
+          <Container>
+            <Navbar/>
+            <Route exact path="/" component={Home}/>
+            <AuthRoutes exact path="/login" component={Login}/>
+            <AuthRoutes exact path="/register" component={Register}/>
+          </Container>
+        </Router>
+    </AuthProvider>
   );
 }
 
