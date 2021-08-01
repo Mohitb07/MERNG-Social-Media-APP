@@ -35,7 +35,7 @@ module.exports = {
         async createPost(_, {body}, context){
             const user = checkAuth(context);
 
-            if(args.body.trim() === '') {
+            if(body.trim() === '') {
                 throw new Error('Post body must not be empty')
             }
             
@@ -48,9 +48,9 @@ module.exports = {
 
             const post = await newPost.save()
             // Publishing the subscription
-            context.pubsub.publish('NEW_POST', {
-                newPost: post
-            })
+            // context.pubsub.publish('NEW_POST', {
+            //     newPost: post
+            // })
             
             return post;
         },
@@ -96,10 +96,10 @@ module.exports = {
     },
 
 
-    Subscription: {
-        newPost: {
-            subscribe: (_,__,{pubsub}) => pubsub.asyncIterator('NEW_POST')
-        }
-    }
+    // Subscription: {
+    //     newPost: {
+    //         subscribe: (_,__,{pubsub}) => pubsub.asyncIterator('NEW_POST')
+    //     }
+    // }
 
 }
