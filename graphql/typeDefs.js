@@ -56,8 +56,8 @@ module.exports = gql`
         likePost(postId: ID!): Post!
     }
 
-    type Subscription {
-        newPost: Post! 
-    }
+    # type Subscription {
+    #     newPost: Post! 
+    # }
     
 `
