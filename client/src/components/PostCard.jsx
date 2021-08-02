@@ -1,20 +1,19 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {Button, Card, Icon, Image, Label } from 'semantic-ui-react';
 import moment from 'moment'
 import { Link } from 'react-router-dom';
 
+import {AuthContext} from '../context/auth'
+import LikeButton from '../components/LikeButton'
 
 function PostCard({post: {body, createdAt, id, username, likeCount, commentCount, likes}}) {
-    console.log('date', createdAt)
-
+    
+    const {user} = useContext(AuthContext)
+    
     const likePost = () => {
         console.log('post liked')
     }
 
-    const commentOnPost = () => {
-        console.log('Commented')
-    }
-    
     return (
         <Card fluid>
         <Card.Content>
@@ -30,15 +29,8 @@ function PostCard({post: {body, createdAt, id, username, likeCount, commentCount
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-            <Button as='div' labelPosition='right' onClick={likePost}>
-                <Button color='teal' basic>
-                <Icon name='heart' />
-                </Button>
-                <Label basic color='teal' pointing='left'>
-                {likeCount}
-                </Label>
-            </Button>
-            <Button as='div' labelPosition='right' onClick={commentOnPost}>
+            <LikeButton user={user} post={{id, likeCount, likes}}/>
+            <Button as='div' labelPosition='right' as={Link} to={`/posts/${id}`}>
                 <Button color='blue' basic>
                 <Icon name='comments' />
                 </Button>
@@ -46,6 +38,11 @@ function PostCard({post: {body, createdAt, id, username, likeCount, commentCount
                 {commentCount}
                 </Label>
             </Button>
+            {user && user.username === username && (
+                <Button floated="right" as="div" color="red" onClick={() => console.log('post deleted')}>
+                    <Icon name="trash" style={{margin:0}}/>
+                </Button>
+            )}
         </Card.Content>
       </Card>
     )
