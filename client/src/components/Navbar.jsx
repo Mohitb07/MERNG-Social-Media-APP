@@ -26,7 +26,6 @@ export default function Navbar(){
               <Menu.Item
                 name='Logout'
                 onClick={logout}
-    
               />
             </Menu.Menu>
           </Menu>
