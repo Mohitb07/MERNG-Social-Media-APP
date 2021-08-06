@@ -17,6 +17,7 @@ import Comment from '../components/Comment'
 import { AuthContext } from '../context/auth';
 import LikeButton from '../components/LikeButton';
 import DeleteButton from '../components/DeleteButton';
+import Tooltip from '../utils/tooltip'
 
 function SinglePost(props) {
   const postId = props.match.params.postId;
@@ -68,26 +69,25 @@ function SinglePost(props) {
               <hr/>
               <Card.Content extra>
                 <LikeButton user={user} post={{ id, likeCount, likes }} />
-                <Button
-                    as={'div'}
-                    labelPosition="right"
-                    onClick={() => console.log('comment on post')}
-                >
-                  <Button basic color="teal">
-                    <Icon name="comments"/>
+                <Tooltip content="Post Comment">
+                  <Button
+                      as={'div'}
+                      labelPosition="right"
+                      onClick={() => console.log('comment on post')}
+                  >
+                    <Button basic color="teal">
+                      <Icon name="comments"/>
+                    </Button>
+                    <Label basic color="blue" pointing="left">
+                      {commentCount}  
+                    </Label> 
                   </Button>
-                  <Label basic color="blue" pointing="left">
-                    {commentCount}  
-                  </Label> 
-                </Button>
+                </Tooltip>
                 {user && user.username === username && (
                     <DeleteButton postId={postId} callback={deletePostCallback}/>
                 )}
               </Card.Content>
             </Card>
-            {/* {comments.map(comment => (
-              
-            ))} */}
             <Comment comments={comments} username={username} postId={postId}/>
           </Grid.Column>
         </Grid.Row>
@@ -96,6 +96,7 @@ function SinglePost(props) {
   }
   return postMarkup;
 }
+
 
 const FETCH_POST_QUERY = gql`
   query($postId: ID!) {
