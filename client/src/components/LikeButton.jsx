@@ -4,6 +4,8 @@ import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import { Button, Icon, Label } from 'semantic-ui-react';
 
+import Tooltip from '../utils/tooltip'
+
 function LikeButton({user, post:{id, likes, likeCount}}) {
     const [hasLiked, setHasLiked] = useState(false)
     useEffect(() => {
@@ -35,12 +37,14 @@ function LikeButton({user, post:{id, likes, likeCount}}) {
     
     
     return (
-        <Button as='div' labelPosition='right' onClick={likePost}>
-            {likeButton}
-            <Label basic color='teal' pointing='left'>
-            {likeCount}
-            </Label>
-        </Button>
+            <Tooltip content={hasLiked ? 'Unlike' : 'Like'}>
+              <Button as='div' labelPosition='right' onClick={likePost}>
+                {likeButton}
+                <Label basic color='teal' pointing='left'>
+                {likeCount}
+                </Label>
+              </Button>
+            </Tooltip>
     )
 }
 

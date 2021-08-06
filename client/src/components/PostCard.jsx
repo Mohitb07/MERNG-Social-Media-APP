@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import {AuthContext} from '../context/auth'
 import LikeButton from './LikeButton'
 import DeleteButton from './DeleteButton'
+import Tooltip from '../utils/tooltip';
 
 function PostCard({post: {body, createdAt, id, username, likeCount, commentCount, likes}}) {
     
@@ -27,14 +28,16 @@ function PostCard({post: {body, createdAt, id, username, likeCount, commentCount
         </Card.Content>
         <Card.Content extra>
             <LikeButton user={user} post={{id, likeCount, likes}}/>
-            <Button labelPosition='right' as={Link} to={`/posts/${id}`}>
+            <Tooltip content='Comment on Post'>
+              <Button labelPosition='right' as={Link} to={`/posts/${id}`}>
                 <Button color='blue' basic>
-                <Icon name='comments' />
+                  <Icon name='comments' />
                 </Button>
                 <Label basic color='blue' pointing='left'>
-                {commentCount}
+                  {commentCount}
                 </Label>
-            </Button>
+              </Button>
+            </Tooltip>          
             {user && user.username === username && <DeleteButton postId={id}/>}
         </Card.Content>
       </Card>
