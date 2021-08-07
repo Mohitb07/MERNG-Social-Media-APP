@@ -13,6 +13,7 @@ function PostCard({post: {body, createdAt, id, username, likeCount, commentCount
     const {user} = useContext(AuthContext)
 
     return (
+        <div style={{marginTop:'2%'}}>
         <Card fluid>
         <Card.Content>
           <Image
@@ -20,7 +21,7 @@ function PostCard({post: {body, createdAt, id, username, likeCount, commentCount
             size='mini'
             src='https://react.semantic-ui.com/images/avatar/large/molly.png'
           />
-          <Card.Header>{username}</Card.Header>
+          <Card.Header as={Link} to={`/user/${id}`}>{username}</Card.Header>
           <Card.Meta as={Link} to={`/posts/${id}`}>{moment(createdAt).fromNow(true)}</Card.Meta>
           <Card.Description>
            {body}
@@ -41,6 +42,7 @@ function PostCard({post: {body, createdAt, id, username, likeCount, commentCount
             {user && user.username === username && <DeleteButton postId={id}/>}
         </Card.Content>
       </Card>
+      </div>
     )
 }
 
