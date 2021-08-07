@@ -11,11 +11,18 @@ function LikeButton({user, post:{id, likes, likeCount}}) {
     useEffect(() => {
         if(user && likes.find(like => like.username === user.username)){
             setHasLiked(true)
-        }else setHasLiked(false)
+        }else {
+          console.log('not logged in')
+          setHasLiked(false)
+
+        }
     }, [user, likes, hasLiked])
 
     const [likePost] = useMutation(LIKE_POST_MUTATION, {
-        variables: {postId: id}
+        variables: {postId: id},
+        onError(err){
+          console.log(err)
+        }
     })
     
     
