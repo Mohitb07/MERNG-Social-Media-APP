@@ -27,8 +27,8 @@ module.exports = {
             
             const user = await User.findOne({username})
             if(!user) {
-                errors.general = 'User not found'
-                throw new UserInputError('User not found', {errors})
+                errors.general = 'Incorrect Username or Password'
+                throw new UserInputError('Incorrect Username or password', {errors})
             }
 
             const isMatch = await bcrypt.compare(password, user.password);
