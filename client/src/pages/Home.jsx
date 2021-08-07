@@ -1,11 +1,13 @@
 import React, {useContext} from 'react'
 import { useQuery } from '@apollo/client'
-import { Grid, Transition } from 'semantic-ui-react'
+import { Dimmer, Grid, Transition } from 'semantic-ui-react'
 import PostCard from '../components/PostCard'
+import { Loader } from 'semantic-ui-react'
 
 import {AuthContext} from '../context/auth'
 import PostForm from '../components/PostForm'
 import {FETCH_POSTS_QUERY} from '../utils/graphql'
+
 
 function Home() {
     const {user} = useContext(AuthContext)
@@ -22,7 +24,11 @@ function Home() {
                     </Grid.Column>
                 )}
                 {loading ? (
-                    <h1>Loading...</h1>
+                    <div style={{position:'absolute', top:'150%', left:'50%'}}>
+                        <Dimmer inverted active>
+                            <Loader/>
+                        </Dimmer>
+                    </div>
                 ) : (
                  <Transition.Group>
                      {
