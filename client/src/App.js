@@ -10,6 +10,7 @@ import Navbar from './components/Navbar'
 import { AuthProvider } from './context/auth';
 import AuthRoutes from './utils/AuthRoutes';
 import Post from './pages/Post'
+import UserProfile from './pages/UserProfile'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <AuthRoutes exact path="/login" component={Login}/>
             <AuthRoutes exact path="/register" component={Register}/>
             <Route exact path="/posts/:postId" component={Post}/>
+            <Route exact path="/user/:userId" component={UserProfile}/>
           </Container>
         </Router>
     </AuthProvider>
