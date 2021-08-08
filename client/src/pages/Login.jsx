@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import React, { useState, useContext } from 'react'
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Form, Label } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client'
 
 import {useForm} from '../utils/hooks'
@@ -23,6 +23,7 @@ function Login(props) {
         onError(err) {
             console.log('error', err.graphQLErrors[0].extensions.errors)
             setErrors(err.graphQLErrors[0].extensions.errors)
+            console.log('error state', errors)
         },
         variables: values
     })
@@ -34,38 +35,51 @@ function Login(props) {
     return (
         <div className="form-container">
             <Form onSubmit={onSubmitHandler} noValidate className={loading ? 'loading' : ''}>
-                <h1>Register</h1>
-                <Form.Input
-                    label="Username"
-                    placeholder="Username..."
-                    name="username"
-                    type="text"
-                    value={values.username}
-                    error={errors.general ? true : false}
-                    onChange={onChangeHandler}
-                />
-                <Form.Input
-                    label="Password"
-                    placeholder="Password..."
-                    name="password"
-                    type="password"
-                    value={values.password}
-                    error={errors.general ? true : false}
-                    onChange={onChangeHandler}
-                />
+                <h1>Login</h1>
+                <Form.Field>
+                    <input onChange={onChangeHandler} value={values.username} label="Username" placeholder="Username..." name="username"  type="text" />
+                    {Object.keys(errors).length > 0 && (
+                        errors.hasOwnProperty('username') ? (
+                            <Label basic color="red" pointing>
+                                {errors.username}
+                            </Label>  
+                        ):(
+                            errors.hasOwnProperty('general') && (
+                            <Label basic color="red" pointing>
+                                {errors.general}
+                            </Label> 
+                            )
+                        )
+                    )}
+                </Form.Field>
+                <Form.Field>
+                    <input 
+                        label="Password"
+                        placeholder="Password..."
+                        name="password"
+                        type="password"
+                        value={values.password}
+                        onChange={onChangeHandler}
+                    />
+                    {Object.keys(errors).length > 0 && (
+                        errors.hasOwnProperty('password') ? (
+                            <Label basic color="red" pointing>
+                                {errors.password}
+                            </Label>  
+                        ):(
+                            errors.hasOwnProperty('general') && (
+                            <Label basic color="red" pointing>
+                                {errors.general}
+                            </Label> 
+                            )
+                        )
+                    )}
+                                      
+                </Form.Field>
                 <Button type="submit" primary>
                     Login
                 </Button>
             </Form>
-            {Object.keys(errors).length > 0 && (
-                <div className="ui error message">
-                    <ul className="list">
-                        {Object.values(errors).map(value => (
-                            <li key={value}>{value}</li>
-                        ))}
-                    </ul>
-                </div>
-            )}
         </div>
     )
 }
