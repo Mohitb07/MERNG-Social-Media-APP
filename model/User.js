@@ -7,4 +7,10 @@ const userSchema = new Schema({
     createdAt: String
 })
 
+userSchema.virtual('posts', {
+    ref:'Post',
+    localField:'_id', 
+    foreignField: 'user'
+})
+
 module.exports = model('User', userSchema)
