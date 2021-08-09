@@ -2,6 +2,8 @@ const {AuthenticationError, UserInputError} = require('apollo-server')
 
 const Post = require('../../model/Post')
 const checkAuth = require('../../utils/checkAuth')
+const User = require('../../model/User')
+const ObjectId = require('mongoose').Types.ObjectId
 
 module.exports = {
     Query: {
@@ -27,6 +29,25 @@ module.exports = {
             }
          
         },
+
+        async getUserPost(_, {userId}) {
+            try {
+                const user = await User.findById(userId)
+      
+                const allPost = await Post.find({})
+
+                const post = await allPost.filter(post => post.username === user.username)
+
+                if(post){
+                    return post;
+                }else {
+                    throw new Error('Post not found');
+                }
+                
+            }catch(err){
+                throw new Error(err)
+            }
+        }
        
     },
 
