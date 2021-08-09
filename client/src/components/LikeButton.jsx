@@ -12,7 +12,6 @@ function LikeButton({user, post:{id, likes, likeCount}}) {
         if(user && likes.find(like => like.username === user.username)){
             setHasLiked(true)
         }else {
-          console.log('not logged in')
           setHasLiked(false)
 
         }
