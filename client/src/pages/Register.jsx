@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import React, { useState, useContext } from 'react'
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Form, Label } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client'
 
 import { useForm } from '../utils/hooks'
@@ -36,15 +36,29 @@ function Register(props) {
         <div className="form-container">
             <Form onSubmit={onSubmitHandler} noValidate className={loading ? 'loading' : ''}>
                 <h1>Register</h1>
-                <Form.Input
+                <Form.Field>
+                    <input
                     label="Username"
+                    type="text"                     
                     placeholder="Username..."
                     name="username"
-                    type="text"
                     value={values.username}
-                    error={errors.username ? true : false}
                     onChange={onChangeHandler}
-                />
+                    />
+                          {Object.keys(errors).length > 0 && (
+                        errors.hasOwnProperty('username') ? (
+                            <Label basic color="red" pointing>
+                                {errors.username}
+                            </Label>  
+                        ):(
+                            errors.hasOwnProperty('general') && (
+                            <Label basic color="red" pointing>
+                                {errors.general}
+                            </Label> 
+                            )
+                        )
+                    )}
+                </Form.Field>
                 <Form.Input
                     label="Email"
                     placeholder="Email..."
