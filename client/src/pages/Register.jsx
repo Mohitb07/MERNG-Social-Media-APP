@@ -59,7 +59,7 @@ function Register(props) {
                         )
                     )}
                 </Form.Field>
-                <Form.Input
+                {/* <Form.Input
                     label="Email"
                     placeholder="Email..."
                     name="email"
@@ -67,7 +67,30 @@ function Register(props) {
                     value={values.email}
                     error={errors.email ? true : false}
                     onChange={onChangeHandler}
-                />
+                /> */}
+                <Form.Field>
+                <input
+                    label="email"
+                    type="text"                     
+                    placeholder="email..."
+                    name="email"
+                    value={values.email}
+                    onChange={onChangeHandler}
+                    />
+                          {Object.keys(errors).length > 0 && (
+                        errors.hasOwnProperty('email') ? (
+                            <Label basic color="red" pointing>
+                                {errors.email}
+                            </Label>  
+                        ):(
+                            errors.hasOwnProperty('general') && (
+                            <Label basic color="red" pointing>
+                                {errors.general}
+                            </Label> 
+                            )
+                        )
+                    )}
+                </Form.Field>
                 <Form.Input
                     label="Password"
                     placeholder="Password..."
