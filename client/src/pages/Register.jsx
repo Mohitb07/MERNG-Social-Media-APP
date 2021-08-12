@@ -37,15 +37,16 @@ function Register(props) {
             <Form onSubmit={onSubmitHandler} noValidate className={loading ? 'loading' : ''}>
                 <h1>Register</h1>
                 <Form.Field>
-                    <input
-                    label="Username"
-                    type="text"                     
-                    placeholder="Username..."
-                    name="username"
-                    value={values.username}
-                    onChange={onChangeHandler}
-                    />
-                          {Object.keys(errors).length > 0 && (
+                <label for="username">Username</label>
+                <input
+                    id="username" 
+                    onChange={onChangeHandler} 
+                    value={values.username} label="Username" 
+                    placeholder="Username..." name="username"  
+                    type="text" 
+                />
+                
+                {Object.keys(errors).length > 0 && (
                         errors.hasOwnProperty('username') ? (
                             <Label basic color="red" pointing>
                                 {errors.username}
@@ -58,21 +59,15 @@ function Register(props) {
                             )
                         )
                     )}
+
                 </Form.Field>
-                {/* <Form.Input
-                    label="Email"
-                    placeholder="Email..."
-                    name="email"
-                    type="email"
-                    value={values.email}
-                    error={errors.email ? true : false}
-                    onChange={onChangeHandler}
-                /> */}
+
                 <Form.Field>
+                <label for="email">Email</label>
                 <input
-                    label="email"
+                    id="email"
                     type="text"                     
-                    placeholder="email..."
+                    placeholder="Email..."
                     name="email"
                     value={values.email}
                     onChange={onChangeHandler}
@@ -91,37 +86,60 @@ function Register(props) {
                         )
                     )}
                 </Form.Field>
-                <Form.Input
-                    label="Password"
-                    placeholder="Password..."
-                    name="password"
-                    type="password"
-                    value={values.password}
-                    error={errors.password ? true : false}
-                    onChange={onChangeHandler}
-                />
-                <Form.Input
-                    label="Confirm Password"
-                    placeholder="Confirm Password..."
-                    name="confirmPassword"
-                    type="password"
-                    value={values.confirmPassword}
-                    error={errors.confirmPassword ? true : false}
-                    onChange={onChangeHandler}
-                />
-                <Button type="submit" primary>
+                <Form.Field>
+                    <label for="password">Password</label>
+                    <input
+                        id="password"
+                        label="Password"
+                        placeholder="Password..."
+                        name="password"
+                        type="password"
+                        value={values.password}
+                        onChange={onChangeHandler}
+                    />
+                     {Object.keys(errors).length > 0 && (
+                        errors.hasOwnProperty('password') ? (
+                            <Label basic color="red" pointing>
+                                {errors.password}
+                            </Label>  
+                        ):(
+                            errors.hasOwnProperty('general') && (
+                            <Label basic color="red" pointing>
+                                {errors.general}
+                            </Label> 
+                            )
+                        )
+                    )}
+                </Form.Field>
+                <Form.Field>
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input
+                        id="confirmPassword"
+                        label="Confirm Password"
+                        placeholder="Confirm Password..."
+                        name="confirmPassword"
+                        type="password"
+                        value={values.confirmPassword}
+                        onChange={onChangeHandler}
+                    />
+                     {Object.keys(errors).length > 0 && (
+                        errors.hasOwnProperty('confirmPassword') ? (
+                            <Label basic color="red" pointing>
+                                {errors.confirmPassword}
+                            </Label>  
+                        ):(
+                            errors.hasOwnProperty('general') && (
+                            <Label basic color="red" pointing>
+                                {errors.general}
+                            </Label> 
+                            )
+                        )
+                    )}
+                </Form.Field>
+                <Button type="submit" secondary>
                     Register
                 </Button>
             </Form>
-            {Object.keys(errors).length > 0 && (
-                <div className="ui error message">
-                    <ul className="list">
-                        {Object.values(errors).map(value => (
-                            <li key={value}>{value}</li>
-                        ))}
-                    </ul>
-                </div>
-            )}
         </div>
     )
 }
