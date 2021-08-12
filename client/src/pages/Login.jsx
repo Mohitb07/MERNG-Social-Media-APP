@@ -37,7 +37,16 @@ function Login(props) {
             <Form onSubmit={onSubmitHandler} noValidate className={loading ? 'loading' : ''}>
                 <h1>Login</h1>
                 <Form.Field>
-                    <input onChange={onChangeHandler} value={values.username} label="Username" placeholder="Username..." name="username"  type="text" />
+                    <label for="username">Username</label>
+                    <input 
+                        id="username"
+                        onChange={onChangeHandler} 
+                        value={values.username} 
+                        label="Username" 
+                        placeholder="Username..." 
+                        name="username"  
+                        type="text" 
+                    />
                     {Object.keys(errors).length > 0 && (
                         errors.hasOwnProperty('username') ? (
                             <Label basic color="red" pointing>
@@ -53,7 +62,9 @@ function Login(props) {
                     )}
                 </Form.Field>
                 <Form.Field>
+                    <label for="username">Password</label>
                     <input 
+                        id="password"
                         label="Password"
                         placeholder="Password..."
                         name="password"
@@ -76,7 +87,7 @@ function Login(props) {
                     )}
                                       
                 </Form.Field>
-                <Button type="submit" primary>
+                <Button type="submit" secondary>
                     Login
                 </Button>
             </Form>
