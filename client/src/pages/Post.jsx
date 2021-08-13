@@ -54,7 +54,7 @@ function SinglePost(props) {
         <Grid.Row>
           <Grid.Column width={2}>
             <Image
-              src="https://react.semantic-ui.com/images/avatar/large/molly.png"
+              src="https://pbs.twimg.com/profile_images/1416573352358162446/vQPbSf9Z_400x400.jpg"
               size="small"
               float="right"
             />
