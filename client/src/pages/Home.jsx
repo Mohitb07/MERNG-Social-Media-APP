@@ -34,7 +34,7 @@ function Home() {
                      {
                             posts && posts.map(post => (
                                 <Grid.Column key={post.id} style={{marginBottom:20}}>
-                                    <PostCard post={post} />
+                                    <PostCard postUserId={post.user} post={post} />
                                 </Grid.Column>
                             ))
                      }
