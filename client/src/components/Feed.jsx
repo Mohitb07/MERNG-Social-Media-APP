@@ -1,16 +1,17 @@
 import React from 'react'
 import { Feed, Icon } from 'semantic-ui-react'
+import moment from 'moment'
 
-const FeedExampleIconLabel = () => (
+const FeedExampleIconLabel = ({post:{body,createdAt}}) => (
   <Feed>
     <Feed.Event>
       <Feed.Label>
         <Icon name='pencil' />
       </Feed.Label>
       <Feed.Content>
-        <Feed.Date>Today</Feed.Date>
+        <Feed.Date>{moment(createdAt).fromNow()}</Feed.Date>
         <Feed.Summary>
-          You posted on your friend <a>Stevie Feliciano's</a> wall.
+          {body}
         </Feed.Summary>
       </Feed.Content>
     </Feed.Event>
