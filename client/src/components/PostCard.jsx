@@ -8,10 +8,10 @@ import LikeButton from './LikeButton'
 import DeleteButton from './DeleteButton'
 import Tooltip from '../utils/tooltip';
 
-function PostCard({post: {body, createdAt, id, username, likeCount, commentCount, likes}}) {
+function PostCard({postUserId,post: {body, createdAt, id, username, likeCount, commentCount, likes}}) {
     
     const {user} = useContext(AuthContext)
-
+    console.log('postUserId', postUserId)
     return (
         <div style={{marginTop:'2%'}}>
         <Card fluid>
@@ -19,12 +19,12 @@ function PostCard({post: {body, createdAt, id, username, likeCount, commentCount
           <Image
             floated='right'
             size='mini'
-            src='https://react.semantic-ui.com/images/avatar/large/molly.png'
+            src='https://pbs.twimg.com/profile_images/1416573352358162446/vQPbSf9Z_400x400.jpg'
           />
-          <Card.Header as={Link} to={`/user/${id}`}>{username}</Card.Header>
+          <Card.Header as={Link} to={user ? `/user/${postUserId}`: '/login'}>{username}</Card.Header>
           <Card.Meta as={Link} to={`/posts/${id}`}>{moment(createdAt).fromNow(true)}</Card.Meta>
           <Card.Description>
-           {body}
+           <Link to={`/posts/${id}`}><p style={{fontSize:15,color:'black'}}>{body}</p></Link>
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
