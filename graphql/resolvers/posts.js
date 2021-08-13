@@ -10,6 +10,7 @@ module.exports = {
         async getPosts() {
             try {
                 const posts = await Post.find().sort({createdAt: -1})
+                console.log('getPosts', posts)
                 return posts;
             }catch(e) {
                 throw new Error(e)
@@ -32,13 +33,11 @@ module.exports = {
 
         async getUserPost(_, {userId}) {
             try {
-                const user = await User.findById(userId)
-      
-                const allPost = await Post.find({})
-
-                const post = await allPost.filter(post => post.username === user.username)
-
-                if(post){
+                const user = await User.findById(userId);
+                // console.log(user)
+                const post = await Post.find({user: user._id})
+                // console.log(post)
+                if(post.length > 0){
                     return post;
                 }else {
                     throw new Error('Post not found');
