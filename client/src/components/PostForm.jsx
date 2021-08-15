@@ -54,7 +54,7 @@ function PostForm() {
                     error={error ? true : false}
                 />
                 <Button type="submit" color="teal">
-                    Submit
+                    Post
                 </Button>
             </Form.Field>
         </Form>
