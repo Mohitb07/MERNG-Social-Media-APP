@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
-import React, { useState } from 'react'
-import { Container, Dimmer, Grid, Image, Loader, Rail, Segment } from 'semantic-ui-react'
+import React from 'react'
+import { Container, Dimmer, Grid, Image, Loader, Segment } from 'semantic-ui-react'
 import { useQuery } from '@apollo/client'
 
 import Feed from '../components/Feed'
@@ -23,13 +23,52 @@ function UserProfile(props) {
       
       postMarkup = (
         <div className="user-profile-container" style={{}}>
-          <Image className="image" src='https://pbs.twimg.com/profile_images/1416573352358162446/vQPbSf9Z_400x400.jpg' size='medium' circular centered />
+          {/* <Image className="image" src='https://pbs.twimg.com/profile_images/1416573352358162446/vQPbSf9Z_400x400.jpg' size='medium' circular centered />
           <div className="name">
             {post && <h3>{post[0].username}</h3>}
-          </div>
+          </div> */}
+              {/* <div style={{display:"flex", justifyContent:'center', alignItems: 'center'}}>
+                            <div style={{width:'9rem'}}>
+                            <p>Followings</p>
+                            <h4>10</h4>
+                            </div>
+                            <div style={{width:'9rem'}}>
+                            <p>Followers</p>
+                            <h4>20</h4>
+                            </div>
+              </div> */}
+        
+        <div className="profileContainer">
+           <section className="profile">
+                <header className="profileHeader">
+                    <div className="details">
+            
+                     <img src="https://pbs.twimg.com/profile_images/1416573352358162446/vQPbSf9Z_400x400.jpg" alt="profile pic" className="profilePic" />                
+                        
+                    
+                     {post && <h3 className="heading">{post[0].username}</h3>}
+                    <div style={{display:"flex", justifyContent:'center', alignItems: 'center',marginTop:'2rem'}}>
+                            <div style={{width:'9rem'}}>
+                            <p style={{fontSize:18}}>Followings</p>
+                            <h2>10</h2>
+                            </div>
+                            <div style={{width:'9rem'}}>
+                            <p style={{fontSize:18}}>Followers</p>
+                            <h2>20</h2>
+                            </div>
+                    </div>
+                    </div>
+                </header>
+                </section>
+            
+        </div>
+              <div style={{marginTop:'2rem'}}>
+              <Container>
               <Grid columns={1}>
                 <Grid.Column>
                   <Segment>
+                    <h2 style={{textAlign: 'center'}}>Your Posts</h2>
+                    <hr/>
                       {
                         loading ? (
                           <Dimmer inverted active>
@@ -46,6 +85,8 @@ function UserProfile(props) {
                   </Segment>
                 </Grid.Column>
               </Grid>
+              </Container>
+              </div>
         </div>
       )
     }
