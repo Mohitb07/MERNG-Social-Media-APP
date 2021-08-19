@@ -1,7 +1,7 @@
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import { Container } from 'semantic-ui-react';
-
 import 'semantic-ui-css/semantic.min.css'
+
 import './App.css';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -14,18 +14,18 @@ import UserProfile from './pages/UserProfile'
 
 function App() {
   return (
-    <AuthProvider>
-        <Router>
-          <Container>
-            <Navbar/>
-            <Route exact path="/" component={Home}/>
-            <AuthRoutes exact path="/login" component={Login}/>
-            <AuthRoutes exact path="/register" component={Register}/>
-            <Route exact path="/posts/:postId" component={Post}/>
-            <Route exact path="/user/:userId" component={UserProfile}/>
-          </Container>
-        </Router>
-    </AuthProvider>
+        <AuthProvider>
+            <Router>
+              {/* <Container> */}
+                <Navbar/>
+                <Route exact path="/" component={Home}/>
+                <AuthRoutes exact path="/login" component={Login}/>
+                <AuthRoutes exact path="/register" component={Register}/>
+                <Route exact path="/posts/:postId" component={Post}/>
+                <Route exact path="/user/:userId" component={UserProfile}/>
+              {/* </Container> */}
+            </Router>
+        </AuthProvider>
   );
 }
 
