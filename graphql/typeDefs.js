@@ -40,12 +40,15 @@ module.exports = gql`
         token: String!
         username: String!
         createdAt: String!
+        followers: [User]!
     }
     
     type Query {
         getPosts: [Post] #for all the posts
         getPost(postId: ID!): Post #for single post
         getUserPost(userId: ID!): [Post] #all post of a user
+        # getUserFollowers(userId: ID!):[User]
+        # getUserFollowings(userId: ID!):[User]
     }
 
     type Mutation {
@@ -56,6 +59,7 @@ module.exports = gql`
         createComment(postId: ID!, body: String!): Post!
         deleteComment(postId: ID!, commentId: ID!): Post!
         likePost(postId: ID!): Post!
+        follow(userId: ID!):String!
     }
 
     # type Subscription {
