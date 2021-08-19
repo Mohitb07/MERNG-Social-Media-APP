@@ -4,7 +4,15 @@ const userSchema = new Schema({
     username : String,
     password : String,
     email    : String,
-    createdAt: String
+    createdAt: String,
+    followers: {
+        type: Array,
+        default: []
+    },
+    followings: {
+        type: Array,
+        default: []
+    }
 })
 
 userSchema.virtual('posts', {
