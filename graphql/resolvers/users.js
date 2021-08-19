@@ -5,6 +5,7 @@ const {UserInputError} = require('apollo-server')
 const User = require('../../model/User')
 const {SECRET} = require('../../config')
 const { validateUserRegisterInput, validateUserLoginInput } = require('../../utils/validators')
+const checkAuth = require('../../utils/checkAuth')
 
 
 function generateToken(user) {
@@ -85,10 +86,33 @@ module.exports = {
                 id : res._id,
                 token
             }
-        }
+        },
 
-        
-        // TODO VALIDATE USER DATA
+        async follow(_, {userId},context){
+            const user = checkAuth(context)
+            if(user.id !== userId){
+                try {
+                    const otherUser = await User.findById(userId);
+                    const me = await User.findById(user.id);
+
+                    if(!otherUser.followers.includes(user.id)){
+                        await otherUser.updateOne({$push: {followers: user.id}})
+                        await me.updateOne({$push: {followings: userId}})
+                        await otherUser.save()
+                        await me.save()
+                        return 'user Followed'
+                    }else {
+                        return 'you already follow him'
+                    }
+                }catch(err){
+                    console.log(err)
+                }
+            }else {
+                return 'You cannot follow yourself'
+            }
+           
+        }     
+       
 
     }
 }
