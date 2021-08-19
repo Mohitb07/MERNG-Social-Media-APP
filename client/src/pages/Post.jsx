@@ -10,7 +10,8 @@ import {
   Image,
   Icon,
   Label,
-  Loader
+  Loader,
+  Container
 } from 'semantic-ui-react';
 
 import Comment from '../components/Comment'
@@ -50,6 +51,8 @@ function SinglePost(props) {
     console.log('comments', comments)
 
     postMarkup = (
+      <div style={{marginTop:'2rem'}}>
+      <Container>
       <Grid>
         <Grid.Row>
           <Grid.Column width={2}>
@@ -92,6 +95,8 @@ function SinglePost(props) {
           </Grid.Column>
         </Grid.Row>
       </Grid>
+      </Container>
+      </div>
     );
   }
   return postMarkup;

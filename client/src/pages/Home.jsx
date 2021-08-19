@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import { useQuery } from '@apollo/client'
-import { Dimmer, Grid, Transition } from 'semantic-ui-react'
+import { Container, Dimmer, Grid, Transition } from 'semantic-ui-react'
 import PostCard from '../components/PostCard'
 import { Loader } from 'semantic-ui-react'
 
@@ -13,6 +13,7 @@ function Home() {
     const {user} = useContext(AuthContext)
     const {loading, data: {getPosts: posts} = {}} = useQuery(FETCH_POSTS_QUERY)
     return (
+        <Container>
         <Grid columns={1}>
             <Grid.Row className="page-title">
                 <h1>Recent Posts</h1>
@@ -29,6 +30,7 @@ function Home() {
                             <Loader/>
                         </Dimmer>
                     </div>
+                    
                 ) : (
                  <Transition.Group>
                      {
@@ -42,6 +44,7 @@ function Home() {
                 )}
             </Grid.Row>
         </Grid>
+        </Container>
     )
 }
 

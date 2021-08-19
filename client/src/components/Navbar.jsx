@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Menu } from 'semantic-ui-react'
+import { Container, Menu } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 
 import { AuthContext } from '../context/auth';
@@ -9,12 +9,12 @@ export default function Navbar(){
     const pathname = window.location.pathname;
     const path = pathname === '/' ? 'home' : pathname.substr(1);
     const [activeItem, setActiveItem] = useState(path)
-
     
     
     const handleItemClick = (e, { name }) => setActiveItem(name)
 
     const nav = user ? (
+      <Container>
       <Menu pointing secondary size="massive" color="teal">
             <Menu.Item
               name={user.username}
@@ -29,7 +29,9 @@ export default function Navbar(){
               />
             </Menu.Menu>
           </Menu>
+          </Container>
     ) : (
+      <Container>
       <Menu pointing secondary size="massive" color="teal">
             <Menu.Item
               name='home'
@@ -55,6 +57,7 @@ export default function Navbar(){
               />
             </Menu.Menu>
           </Menu>
+          </Container>
     )
     
     

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import React, { useState, useContext } from 'react'
-import { Button, Form, Label } from 'semantic-ui-react'
+import { Button, Container, Form, Label } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client'
 
 import { useForm } from '../utils/hooks'
@@ -33,6 +33,7 @@ function Register(props) {
     }
     
     return (
+        <Container>
         <div className="form-container">
             <Form onSubmit={onSubmitHandler} noValidate className={loading ? 'loading' : ''}>
                 <h1>Register</h1>
@@ -141,6 +142,7 @@ function Register(props) {
                 </Button>
             </Form>
         </div>
+        </Container>
     )
 }
 
