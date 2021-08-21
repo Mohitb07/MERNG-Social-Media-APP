@@ -21,11 +21,13 @@ export default function Navbar(){
               active
               as={Link}
               to="/"
+              icon="user"
             />
             <Menu.Menu position='right'>
               <Menu.Item
                 name='Logout'
                 onClick={logout}
+                icon="power off"
               />
             </Menu.Menu>
           </Menu>
@@ -54,6 +56,7 @@ export default function Navbar(){
                 onClick={handleItemClick}
                 as={Link}
                 to="/register"
+                icon="paper plane"
               />
             </Menu.Menu>
           </Menu>
