@@ -40,7 +40,8 @@ module.exports = gql`
         token: String!
         username: String!
         createdAt: String!
-        followers: [User]!
+        followers: [String]!
+        followings: [String]!
     }
     
     type Query {
@@ -49,6 +50,7 @@ module.exports = gql`
         getUserPost(userId: ID!): [Post] #all post of a user
         # getUserFollowers(userId: ID!):[User]
         # getUserFollowings(userId: ID!):[User]
+        getUser(userId: ID!): User
     }
 
     type Mutation {
