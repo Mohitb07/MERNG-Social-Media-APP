@@ -17,6 +17,14 @@ function generateToken(user) {
 }
 
 module.exports = {
+    Query : {
+        async getUser(_, {userId}){
+            const user = await User.findById(userId);
+            console.log(user)
+            return user;
+        }
+    },
+
     Mutation: {
         // FOR USER LOGIN
         async login(_, {username, password}, context, info) {
