@@ -15,3 +15,12 @@ export const FETCH_POSTS_QUERY = gql`
         }
     }
 `
+export const GET_USER_QUERY = gql`
+  query getUser($userId: ID!){
+    getUser(userId: $userId){
+      username
+      followers
+      followings
+    }
+  }
+`
