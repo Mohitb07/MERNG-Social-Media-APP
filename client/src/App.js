@@ -16,14 +16,12 @@ function App() {
   return (
         <AuthProvider>
             <Router>
-              {/* <Container> */}
                 <Navbar/>
                 <Route exact path="/" component={Home}/>
                 <AuthRoutes exact path="/login" component={Login}/>
                 <AuthRoutes exact path="/register" component={Register}/>
                 <Route exact path="/posts/:postId" component={Post}/>
                 <Route exact path="/user/:userId" component={UserProfile}/>
-              {/* </Container> */}
             </Router>
         </AuthProvider>
   );
