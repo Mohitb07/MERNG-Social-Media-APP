@@ -19,9 +19,15 @@ function generateToken(user) {
 module.exports = {
     Query : {
         async getUser(_, {userId}){
-            const user = await User.findById(userId);
-            console.log(user)
-            return user;
+            console.log('before')
+            try{
+                const user = await User.findById(userId);
+                if(user !== null){
+                    return user;
+                }
+            }catch(err){
+              console.log('error', err)
+            }
         }
     },
 
@@ -119,7 +125,32 @@ module.exports = {
                 return 'You cannot follow yourself'
             }
            
-        }     
+        },
+        
+        async unFollow(_, {userId},context){
+            const user = checkAuth(context)
+            if(user.id !== userId){
+                try {
+                    const otherUser = await User.findById(userId);
+                    const me = await User.findById(user.id);
+
+                    if(otherUser.followers.includes(user.id)){
+                        await otherUser.updateOne({$pull: {followers: user.id}})
+                        await me.updateOne({$pull: {followings: userId}})
+                        await otherUser.save()
+                        await me.save()
+                        return 'user Unfollowed'
+                    }else {
+                        return 'you already unfollow him'
+                    }
+                }catch(err){
+                    console.log(err)
+                }
+            }
+            else {
+                return 'You cannot unfollow yourself'
+            }
+        }
        
 
     }
