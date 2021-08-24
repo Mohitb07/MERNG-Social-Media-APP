@@ -33,7 +33,7 @@ module.exports = {
         async getUserPost(_, {userId}) {
             try {
                 const user = await User.findById(userId);
-                // console.log(user)
+                console.log('postUser', user)
                 const post = await Post.find({user: user._id})
                 // console.log(post)
                 if(post.length > 0){
