@@ -1,8 +1,10 @@
 import React, { useState, useContext } from 'react'
-import { Container, Menu } from 'semantic-ui-react'
-import {Link} from 'react-router-dom'
+import { Container, Image, Menu } from 'semantic-ui-react'
+import {Link, NavLink} from 'react-router-dom'
+import '../App.css'
 
 import { AuthContext } from '../context/auth';
+import logo from '../assets/logo.png'
 
 export default function Navbar(){
     const {user, logout} = useContext(AuthContext)
@@ -23,6 +25,16 @@ export default function Navbar(){
               to="/"
               icon="user"
             />
+            {/* <Menu.Menu position="left">
+              <Menu.Item>
+                <div className="logo">
+                <Image  as={NavLink} to="/" 
+                  src={logo} size="small"
+                />
+                </div>
+              </Menu.Item>
+            </Menu.Menu> */}
+
             <Menu.Menu position='right'>
               <Menu.Item
                 name='Logout'
@@ -41,6 +53,7 @@ export default function Navbar(){
               onClick={handleItemClick}
               as={Link}
               to="/"
+              icon="home"
             />
             <Menu.Menu position='right'>
               <Menu.Item
@@ -49,6 +62,7 @@ export default function Navbar(){
                 onClick={handleItemClick}
                 as={Link}
                 to="/login"
+                icon="user"
               />
               <Menu.Item
                 name='register'
@@ -56,7 +70,7 @@ export default function Navbar(){
                 onClick={handleItemClick}
                 as={Link}
                 to="/register"
-                icon="paper plane"
+                icon="paper plane"   
               />
             </Menu.Menu>
           </Menu>
