@@ -39,10 +39,9 @@ function UserProfile(props) {
                 <header className="profileHeader">
                     <div className="details">
             
-                     <img src="https://pbs.twimg.com/profile_images/1416573352358162446/vQPbSf9Z_400x400.jpg" alt="profile pic" className="profilePic" />                
+                     <img src="https://pbs.twimg.com/profile_images/1416573352358162446/vQPbSf9Z_400x400.jpg" alt="profile pic" className="profilePic" />               
                         
                     
-                     {/* {post && <h3 className="heading">{post[0].username}</h3>} */}
                      <h3 className="heading">{userData.username}</h3>
                      {
                        post[0].username !== user.username ? <Follow userData={userData} id={userId}/> : <Button>Edit Profile &nbsp; <i class="sun outline icon"></i></Button>
@@ -59,12 +58,31 @@ function UserProfile(props) {
                             </div>
                             <div style={{width:'9rem'}}>
                             <p style={{fontSize:18}}>following</p>
-                            <h2>{userData.followings.length}</h2>
+                            <h2 style={{cursor:'pointer'}}  data-bs-toggle="modal" data-bs-target="#exampleModal" href="#exampleModal">{userData.followings.length}</h2>
                             </div>
                     </div>
                     </div>
                 </header>
                 </section>
+                
+                <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        falsdfj
+                    
+                      </div>
+                      <div class="modal-footer">
+                        {/* <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button> */}
+                      </div>
+                    </div>
+                  </div>
+                </div>
             
         </div>
               <div style={{marginTop:'2rem'}}>
@@ -88,6 +106,7 @@ function UserProfile(props) {
               </Container>
               </div>
         </div>
+       
       )
     }
     return (
