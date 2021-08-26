@@ -6,7 +6,7 @@ import { useQuery } from '@apollo/client'
 import Feed from '../components/Feed'
 import { AuthContext } from '../context/auth';
 import Follow from '../components/Follow'
-import {GET_USER_QUERY} from '../utils/graphql'
+import {GET_USER_QUERY, GET_USER_POSTS} from '../utils/graphql'
 
 function UserProfile(props) {
     const {user}  = useContext(AuthContext)
@@ -58,31 +58,13 @@ function UserProfile(props) {
                             </div>
                             <div style={{width:'9rem'}}>
                             <p style={{fontSize:18}}>following</p>
-                            <h2 style={{cursor:'pointer'}}  data-bs-toggle="modal" data-bs-target="#exampleModal" href="#exampleModal">{userData.followings.length}</h2>
+                            <h2>{userData.followings.length}</h2>
                             </div>
                     </div>
                     </div>
                 </header>
                 </section>
-                
-                <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        falsdfj
-                    
-                      </div>
-                      <div class="modal-footer">
-                        {/* <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button> */}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+
             
         </div>
               <div style={{marginTop:'2rem'}}>
@@ -94,7 +76,7 @@ function UserProfile(props) {
                     <hr/>
                      {
                        post && post.map(post => (
-                        <Feed key={post.id} post={post}/>
+                        <Feed userId={userId} key={post.id} post={post}/>
                       ))
                       }                       
                         
@@ -116,16 +98,6 @@ function UserProfile(props) {
     )
 }
 
-const GET_USER_POSTS = gql`
-  query getUserPost($userId: ID!){
-    getUserPost(userId:$userId){
-        id
-        username
-        body
-        commentCount
-        createdAt
-    }
-  }
-`
+
 
 export default UserProfile;
