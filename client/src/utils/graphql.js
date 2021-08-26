@@ -24,3 +24,15 @@ export const GET_USER_QUERY = gql`
     }
   }
 `
+
+export const GET_USER_POSTS = gql`
+  query getUserPost($userId: ID!){
+    getUserPost(userId:$userId){
+        id
+        username
+        body
+        commentCount
+        createdAt
+    }
+  }
+`
