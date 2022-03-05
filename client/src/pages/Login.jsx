@@ -14,7 +14,6 @@ function Login(props) {
         username: "",
         password: ""
     })
-    
     const [loginUser, { loading }] = useMutation(LOGIN_USER, {
         update(proxy, result) {
             context.login(result.data.login)

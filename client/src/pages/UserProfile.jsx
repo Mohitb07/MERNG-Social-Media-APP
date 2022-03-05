@@ -39,10 +39,10 @@ function UserProfile(props) {
                 <header className="profileHeader">
                     <div className="details">
             
-                     <img src="https://pbs.twimg.com/profile_images/1416573352358162446/vQPbSf9Z_400x400.jpg" alt="profile pic" className="profilePic" />               
+                     <img src="https://1.bp.blogspot.com/-3iIRPoQQFdU/XluhhXuPvJI/AAAAAAAAPLk/Ed6tY7JVwekhlUOIZZsAIGDkWhAdVxzlACLcBGAsYHQ/s1600/whatsapp%2Bprofile%2Bpic%2B%25288%2529.jpg" alt="profile pic" className="profilePic" />               
                         
                     
-                     <h3 className="heading">{userData.username}</h3>
+                     <h3 className="heading">{userData?.username}</h3>
                      {
                        post[0].username !== user.username ? <Follow userData={userData} id={userId}/> : <Button>Edit Profile &nbsp; <i class="sun outline icon"></i></Button>
                      }

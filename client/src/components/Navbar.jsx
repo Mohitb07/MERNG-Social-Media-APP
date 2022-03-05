@@ -25,21 +25,14 @@ export default function Navbar(){
               to="/"
               icon="user"
             />
-            {/* <Menu.Menu position="left">
-              <Menu.Item>
-                <div className="logo">
-                <Image  as={NavLink} to="/" 
-                  src={logo} size="small"
-                />
-                </div>
-              </Menu.Item>
-            </Menu.Menu> */}
 
             <Menu.Menu position='right'>
               <Menu.Item
                 name='Logout'
                 onClick={logout}
+                as={NavLink}
                 icon="power off"
+                to="/"
               />
             </Menu.Menu>
           </Menu>
